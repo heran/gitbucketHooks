@@ -81,14 +81,8 @@ $message .= '<div style="margin-top: 10px;font-size: 12px; font-family: Arial, m
 $message .= '</body></html>';
 
 $subject = '[' . $repoName . '] ' . $mailMessage;
-
-$headers = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-$headers .= 'From: ' . $from . "\r\n";
-$headers .= 'Reply-To: ' . $to . "\r\n";
-mail($to, '=?UTF-8?B?'.base64_encode($subject).'?=', $message, $headers);
-require_once "./email.class.php";
 $smtpconfig;
+require_once "./email.class.php";
 require "./smtp.config.php";
 $smtp = new smtp($smtpconfig->server,$smtpconfig->port,true,$smtpconfig->user,$smtpconfig->pass);
 $smtp->sendmail($to, $smtpconfig->from, $subject, $message, 'HTML');
